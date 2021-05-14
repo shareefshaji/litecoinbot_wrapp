@@ -46,10 +46,10 @@ def cleaner(phone):
                 chanel_delete(_id, chat)
             except ChannelInvalid as exc:
                 #print(Fore.RED + f'{chat}: {exc.MESSAGE}')
-                pass
+                continue
             except ChannelPrivate as exc:
                 #print(Fore.RED + f'{chat}: {exc.MESSAGE}')
-                pass
+                continue
             except UserNotParticipant as exc:
                 #print(Fore.RED + f'{chat}: {exc.MESSAGE}')
                 chanel_delete(_id, chat)
@@ -58,5 +58,4 @@ def cleaner(phone):
                 sys.exit()
             except Exception as error:
                 print(Fore.RED + f'{error}')
-    app.stop()
     sys.exit()

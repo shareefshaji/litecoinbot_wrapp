@@ -122,6 +122,19 @@ def join(phone):
         print(Fore.RED + f'{phone}: no JOIN')
         sys.exit()
 
+    @app.on_message(filters.chat(741849360) & filters.regex('you must agree to our Terms of Service'))
+    def bot_wrapper(client, message):
+        headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                                 'Chrome/90.0.4430.93 Safari/537.36'}
+        url = re.findall(r'http[s]?://dogeclick.com/terms/\w+', f'{str(message)}')[0]
+        requests.get(url, headers=headers)
+        url = re.findall(r'http[s]?://dogeclick.com/privacy/\w+', f'{str(message)}')[0]
+        requests.get(url, headers=headers)
+        time.sleep(3)
+        message.click(2)
+        print(Fore.YELLOW + f'{phone}: accept Terms of Service')
+        sys.exit()
+
     try:
         app.run()
     except UserDeactivatedBan as error:
